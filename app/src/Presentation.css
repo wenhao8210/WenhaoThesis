@@ -1,0 +1,885 @@
+/* Thesis Presentation — slide styles */
+
+/* ========== 统一字体与颜色（整体格式调整只改下面变量） ========== */
+.presentation-wrapper {
+  --font-family: 'Montserrat', sans-serif;
+  --title-size: clamp(1.75rem, 4vw, 2.75rem);   /* 标题 */
+  --subtitle-size: 0.95rem;                     /* 副标题 */
+  --body-size: 0.95rem;                         /* 正文 */
+  --body-size-small: 0.875rem;                  /* 正文小字 */
+  --body-line: 1.6;
+  --body-bold-weight: 600;                      /* 正文加粗 */
+  --color-title: #f8fafc;
+  --color-subtitle: rgba(255, 255, 255, 0.55);
+  --color-body: rgba(248, 250, 252, 0.88);
+  --color-highlight: #fbbf24;                   /* 高亮统一为橙色 */
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.text-title {
+  font-family: var(--font-family);
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-title);
+}
+
+.text-subtitle {
+  font-family: var(--font-family);
+  font-size: var(--subtitle-size);
+  font-weight: 400;
+  color: var(--color-subtitle);
+}
+
+.text-body {
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  font-weight: 400;
+  line-height: var(--body-line);
+  color: var(--color-body);
+}
+
+.text-body strong,
+.text-body .highlight,
+.text-body-bold {
+  font-weight: var(--body-bold-weight);
+}
+
+.presentation-wrapper .highlight {
+  color: var(--color-highlight);
+}
+
+.slide-container {
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.5rem 2rem 5rem;
+}
+
+.brand-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-size: var(--body-size-small);
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-family);
+}
+
+.grid-bg {
+  display: none;
+}
+
+.glow-orb {
+  display: none;
+}
+
+.slide-title {
+  font-family: var(--font-family);
+  font-size: var(--title-size);
+  font-weight: 700;
+  color: var(--color-title);
+  line-height: 1.2;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #fb923c 0%, #fbbf24 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-family: var(--font-family);
+  font-size: var(--subtitle-size);
+  color: var(--color-subtitle);
+  margin: 0 0 2rem 0;
+}
+
+/* Bleed layout: text + image */
+.bleed-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+}
+@media (max-width: 900px) {
+  .bleed-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bleed-text {
+  min-width: 0;
+}
+
+.bleed-image-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+.bleed-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Feature list */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.feature-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.2);
+  color: var(--color-highlight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.feature-text h3 {
+  font-family: var(--font-family);
+  font-size: var(--subtitle-size);
+  font-weight: 600;
+  color: var(--color-title);
+  margin: 0 0 0.35rem 0;
+}
+
+.feature-text p {
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  color: var(--color-body);
+  margin: 0;
+}
+
+/* Content area (centered) */
+.content-area {
+  max-width: 1000px;
+  margin: 2rem auto 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Glass grid */
+.glass-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.glass-card {
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.glass-card .card-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 8px;
+  background: rgba(251, 191, 36, 0.2);
+  color: var(--color-highlight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.glass-card h3 {
+  font-family: var(--font-family);
+  font-size: var(--subtitle-size);
+  font-weight: 600;
+  color: var(--color-title);
+  margin: 0 0 0.5rem 0;
+}
+
+.glass-card p {
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  color: var(--color-body);
+  margin: 0;
+}
+
+.glass-card .highlight {
+  color: var(--color-highlight);
+  font-weight: 500;
+}
+
+/* Evolution slide: three columns + summary (use more screen space) */
+.slide-evolution .content-area {
+  max-width: none;
+  width: 100%;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.evolution-three-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slide-evolution .evolution-three-cols {
+  max-width: min(1600px, 96vw);
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .evolution-three-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+.evolution-card {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.evolution-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.slide-evolution .evolution-card-img-wrap {
+  aspect-ratio: 16/10;
+  min-height: 200px;
+}
+
+.evolution-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.evolution-card h3 {
+  font-family: var(--font-family);
+  font-size: var(--subtitle-size);
+  font-weight: 700;
+  color: var(--color-title);
+  margin: 1.25rem 1rem 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.evolution-card-title {
+  margin: 1rem 1rem 0.75rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.evolution-card-desc {
+  padding: 0 1rem 1rem;
+  font-family: var(--font-family);
+}
+
+.evolution-card-desc .desc-label {
+  font-size: var(--body-size-small);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0.6rem 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.evolution-card-desc ul {
+  margin: 0 0 0.25rem 0;
+  padding-left: 1.1rem;
+  list-style-type: disc;
+}
+
+.evolution-card-desc li {
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  color: var(--color-body);
+  margin-bottom: 0.4rem;
+}
+
+.evolution-card-desc .highlight {
+  color: var(--color-highlight);
+  font-weight: 500;
+}
+
+/* Progress / Limitations 横向对齐：第一块统一最小高度，第二块起始线一致 */
+.evolution-cols-aligned .evolution-card-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.evolution-desc-block {
+  flex: 0 0 auto;
+}
+
+.evolution-cols-aligned .evolution-desc-block:first-child {
+  min-height: 5.5rem;
+}
+
+.evolution-cols-aligned .desc-label {
+  margin-top: 0;
+  margin-bottom: 0.2rem;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.evolution-card p {
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  color: var(--color-body);
+  margin: 0 1rem 1rem;
+}
+
+.evolution-card .highlight {
+  color: var(--color-highlight);
+  font-weight: 500;
+}
+
+.evolution-summary {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.slide-evolution .evolution-summary {
+  max-width: min(1600px, 96vw);
+  margin-top: 2.5rem;
+  padding: 1.5rem 2rem;
+}
+
+.evolution-summary h3 {
+  font-family: var(--font-family);
+  font-size: var(--subtitle-size);
+  font-weight: 700;
+  color: var(--color-title);
+  margin: 1rem 0 0.6rem 0;
+  letter-spacing: 0.02em;
+}
+
+.evolution-summary p {
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  color: var(--color-body);
+  margin: 0;
+}
+
+.evolution-summary .highlight {
+  color: var(--color-highlight);
+  font-weight: 500;
+}
+
+/* Slide 3: DERIVATION — two columns, numbered sections */
+.slide-derivation .derivation-content {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.derivation-title {
+  text-align: center;
+  margin-bottom: 2rem !important;
+}
+
+/* Same vertical stack for Slide 3 and Slide 4 — same spacing so button positions match */
+.derivation-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.derivation-section {
+  margin-bottom: 0;
+}
+
+.derivation-section:last-child {
+  margin-bottom: 0;
+}
+
+.derivation-heading {
+  font-family: var(--font-family);
+  font-size: var(--subtitle-size);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.6rem 0;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0;
+  background: #F77D2C;
+  display: inline-block;
+  letter-spacing: 0.02em;
+}
+
+.derivation-citation {
+  font-family: var(--font-family);
+  font-size: var(--body-size-small);
+  color: var(--color-subtitle);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.derivation-quote {
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  color: var(--color-body);
+  margin: 0;
+  line-height: var(--body-line);
+}
+
+.derivation-quote strong {
+  color: var(--color-highlight);
+  font-weight: var(--body-bold-weight);
+}
+
+/* View Transition: morph the four buttons between Slide 3 and Slide 4 */
+.derivation-morph-brush { view-transition-name: derivation-btn-brush; }
+.derivation-morph-scale { view-transition-name: derivation-btn-scale; }
+.derivation-morph-3d   { view-transition-name: derivation-btn-3d; }
+.derivation-morph-ide  { view-transition-name: derivation-btn-ide; }
+
+/* Slide 4: DERIVATION 转译 — same two-col as Slide 3 so button positions stay fixed */
+.slide-derivation-translated .derivation-heading {
+  margin: 0 0 0.6rem 0;
+}
+
+.derivation-heading-wrap {
+  margin: 0 0 0.6rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.derivation-heading-wrap .derivation-heading {
+  margin: 0;
+}
+
+.derivation-heading-sub {
+  font-family: var(--font-family);
+  font-size: var(--body-size-small);
+  color: var(--color-body);
+  font-weight: 400;
+}
+
+.derivation-bullets {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  color: var(--color-body);
+  line-height: var(--body-line);
+}
+
+.derivation-bullets li {
+  margin-bottom: 0.35rem;
+}
+
+.derivation-bullets li:last-child {
+  margin-bottom: 0;
+}
+
+/* Two column (image + text) */
+.two-column {
+  display: grid;
+  grid-template-columns: 0.45fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+}
+
+.image-window {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+.image-window img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Full bg glass (Slide 4) */
+.full-bg-glass {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 0 1.5rem 1rem;
+}
+
+.full-bg-glass > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.full-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+.glass-panel-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 2.5rem 2rem;
+  max-width: 720px;
+}
+
+.glass-panel-content .slide-title {
+  margin-bottom: 0.25rem;
+}
+
+.goal-metric {
+  font-family: var(--font-family);
+  font-size: var(--title-size);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--color-highlight);
+  margin: 1rem 0 1rem 0;
+}
+
+/* Console box */
+.console-box {
+  margin-top: 1.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(15, 15, 25, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+.console-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.console-header span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.console-title {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.7rem;
+}
+
+.console-body {
+  padding: 1rem 1.25rem;
+  color: var(--color-body);
+  line-height: 1.7;
+}
+.console-body p {
+  margin: 0 0 0.25rem 0;
+}
+.console-body .text-cyan {
+  color: #22d3ee;
+}
+.console-body .text-green {
+  color: #4ade80;
+}
+.console-body .text-dim {
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.5rem;
+}
+
+/* Controls */
+/* Left/right click zones for slide navigation */
+.slide-nav-zone {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 15;
+  pointer-events: auto;
+}
+.slide-nav-prev {
+  left: 0;
+}
+.slide-nav-next {
+  right: 0;
+  left: auto;
+}
+
+/* Prototype slide: narrow nav zones so image receives hover + click */
+.slide-is-prototype .slide-nav-prev {
+  width: 30%;
+}
+.slide-is-prototype .slide-nav-next {
+  width: 30%;
+}
+
+/* Slide 6: PROTOTYPE 1.0 */
+.prototype-image-wrap {
+  position: relative;
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.prototype-image-wrap img {
+  display: block;
+  max-height: 50vh;
+  width: auto;
+  margin: 0 auto;
+  transition: transform 0.35s ease;
+}
+
+.prototype-image-wrap:hover img {
+  transform: scale(1.08);
+}
+
+/* Prototype slide: content + limitations list */
+.prototype-content {
+  max-width: 1100px;
+}
+
+.slide-testbed.content-area {
+  max-width: 1280px;
+}
+
+/* Testbed: 左右图等高，等比例缩放 */
+.slide-testbed .testbed-img-left,
+.slide-testbed .testbed-img-right {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.slide-testbed .flex.items-stretch > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prototype-limitations {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.prototype-limitations-title {
+  font-family: var(--font-family);
+  font-size: var(--subtitle-size);
+  font-weight: 700;
+  color: var(--color-title);
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.02em;
+}
+
+.prototype-limitations-item {
+  margin-bottom: 1rem;
+}
+
+.prototype-limitations-item:last-child {
+  margin-bottom: 0;
+}
+
+.prototype-limitations-head {
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  font-weight: 600;
+  color: var(--color-highlight);
+  margin: 0 0 0.35rem 0;
+  line-height: 1.35;
+}
+
+.prototype-limitations ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-family: var(--font-family);
+  font-size: var(--body-size-small);
+  color: var(--color-body);
+  line-height: var(--body-line);
+}
+
+.prototype-limitations ul li {
+  margin-bottom: 0.25rem;
+}
+
+.prototype-limitations ul li:last-child {
+  margin-bottom: 0;
+}
+
+.prototype-limitations strong {
+  color: var(--color-body);
+  font-weight: var(--body-bold-weight);
+}
+
+/* Play Video button: fixed, same z as close button, so it’s above nav zones */
+.prototype-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.prototype-video-wrap {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+
+.prototype-video-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s;
+}
+
+.prototype-video-close:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.prototype-video {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  margin: 0 auto;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(10, 10, 15, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 20;
+}
+
+.control-btn {
+  padding: 0.5rem 1rem;
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  color: var(--color-title);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+.control-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+}
+.control-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.slide-indicator {
+  font-family: var(--font-family);
+  font-size: var(--body-size-small);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.presentation-wrapper .close-btn-top {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 25;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.presentation-wrapper .close-btn-top:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
