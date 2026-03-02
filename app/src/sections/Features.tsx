@@ -165,7 +165,7 @@ const Features = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch"
           style={{ transformStyle: 'preserve-3d' }}
         >
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <div
               key={feature.title}
               className="feature-card-wrapper flex"
