@@ -203,18 +203,29 @@ const ToolsPreview = () => {
           </p>
         </div>
 
-        {/* Quick Get Started — 80% width video above PATH */}
-        <div className="w-[80%] mx-auto mb-12 md:mb-16 rounded-lg overflow-hidden bg-gray-900 shadow-lg">
-          <video
-            src="/QuickDemoShowcase/demo.mp4"
-            poster="/QuickDemoShowcase/Cover.jpg"
-            className="w-full aspect-video object-cover"
-            controls
-            playsInline
-            preload="metadata"
+        {/* CreateCommand — same size as Quick Demo, above it */}
+        <div className="w-[80%] mx-auto mb-12 md:mb-16">
+          <h3
+            className="text-lg md:text-xl font-bold text-black mb-4 text-center"
+            style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
-            Your browser does not support the video tag.
-          </video>
+            How to create a command?
+          </h3>
+          <div className="rounded-lg overflow-hidden bg-gray-900 shadow-lg">
+            <video
+              src="/CreateCommand.mp4"
+              className="w-full aspect-video object-cover"
+              controls
+              playsInline
+              preload="auto"
+              onLoadedMetadata={(e) => {
+                const v = e.currentTarget;
+                if (v.duration >= 32) v.currentTime = 32;
+              }}
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
 
         {/* Preview Cards by Category */}
@@ -334,6 +345,20 @@ const ToolsPreview = () => {
               </div>
             );
           })}
+
+          {/* Quick Demo Showcase — below Shrubs & Tree */}
+          <div className="w-[80%] mx-auto rounded-lg overflow-hidden bg-gray-900 shadow-lg">
+            <video
+              src="/QuickDemoShowcase/demo.mp4"
+              poster="/QuickDemoShowcase/Cover.jpg"
+              className="w-full aspect-video object-cover"
+              controls
+              playsInline
+              preload="metadata"
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </div>
 

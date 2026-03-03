@@ -54,9 +54,9 @@ const SiteIntroduction = ({ onClose }: SiteIntroductionProps) => {
 
   return (
     <div className={`presentation-wrapper${currentSlide === 6 ? ' slide-is-prototype' : ''}`}>
-      {currentSlide === 0 && <Slide1 />}
-      {currentSlide === 1 && <SlideAmbiguityPrecision />}
-      {currentSlide === 2 && <Slide2 />}
+      {currentSlide === 0 && <SlideAmbiguityPrecision />}
+      {currentSlide === 1 && <Slide2 />}
+      {currentSlide === 2 && <Slide1 />}
       {currentSlide === 3 && <Slide3 />}
       {currentSlide === 4 && <Slide4Derivation />}
       {currentSlide === 5 && <Slide4 />}
