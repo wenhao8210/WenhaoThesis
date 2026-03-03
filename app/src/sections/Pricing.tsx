@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Check, Star, Zap } from 'lucide-react';
+import { Check, Star, Zap, X } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,52 +20,52 @@ interface PricingPlan {
 
 const pricingPlans: PricingPlan[] = [
   {
-    name: '月度订阅',
-    price: 159,
-    period: '/月',
-    eduPrice: 109,
+    name: 'Monthly',
+    price: 39,
+    period: '/month',
+    eduPrice: 29,
     features: [
-      '全功能',
-      '有效期30天',
-      '一台电脑使用（可更换）',
-      '仅支持Win系统+Rhino7.9以上'
+      'Full features',
+      '30-day validity',
+      'One device (transferable)',
+      'Windows + Rhino 7.9 or above only'
     ],
-    cta: '立即订阅'
+    cta: 'Subscribe Now'
   },
   {
-    name: '年度订阅',
-    price: 1899,
-    period: '/年',
-    eduPrice: 1299,
+    name: 'Annual',
+    price: 299,
+    period: '/year',
+    eduPrice: 249,
     features: [
-      '全功能',
-      '专属学习资源',
-      '一年内免费更新',
-      '专业技术支持',
-      '一台电脑使用（可更换）',
-      '仅支持Win系统+Rhino7.9以上'
+      'Full features',
+      'Exclusive learning resources',
+      'Free updates for one year',
+      'Professional support',
+      'One device (transferable)',
+      'Windows + Rhino 7.9 or above only'
     ],
-    badge: '推荐',
+    badge: 'Recommended',
     badgeType: 'recommended',
-    cta: '立即订阅',
+    cta: 'Subscribe Now',
     highlight: true
   },
   {
-    name: '永久授权',
-    price: 1899,
-    originalPrice: 5899,
-    period: '限时',
-    eduPrice: 1899,
+    name: 'Lifetime License',
+    price: 499,
+    originalPrice: 799,
+    period: 'Limited time',
+    eduPrice: 449,
     features: [
-      '全功能永久使用',
-      '终身免费更新',
-      '一对一技术支持',
-      '一台电脑使用（可更换）',
-      '仅支持Win系统+Rhino7.9以上'
+      'Full features, lifetime use',
+      'Lifetime free updates',
+      'One-on-one support',
+      'One device (transferable)',
+      'Windows + Rhino 7.9 or above only'
     ],
-    badge: '限时',
+    badge: 'Limited',
     badgeType: 'limited',
-    cta: '立即购买'
+    cta: 'Buy Now'
   }
 ];
 
@@ -75,6 +75,7 @@ const Pricing = () => {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const [animatedPrices, setAnimatedPrices] = useState<number[]>([0, 0, 0]);
+  const [showJustKidding, setShowJustKidding] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -220,13 +221,13 @@ const Pricing = () => {
             className="section-title text-black mb-4"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            选择方案
+            Choose a Plan
           </h2>
           <p
             ref={subtitleRef}
             className="section-subtitle"
           >
-            限时特惠 · 早鸟用户专属权益
+            Limited-time offer · Early-bird benefits
           </p>
         </div>
 
@@ -268,7 +269,7 @@ const Pricing = () => {
               {/* Price */}
               <div className="mb-2">
                 <div className="flex items-baseline">
-                  <span className="text-lg text-gray-500 mr-1">¥</span>
+                  <span className="text-lg text-gray-500 mr-1">$</span>
                   <span
                     className="text-4xl md:text-5xl font-bold text-black"
                     style={{ fontFamily: 'Montserrat, sans-serif' }}
@@ -279,14 +280,14 @@ const Pricing = () => {
                 </div>
                 {plan.originalPrice && (
                   <p className="text-sm text-gray-400 line-through mt-1">
-                    永久版{plan.originalPrice}
+                    Was ${plan.originalPrice}
                   </p>
                 )}
               </div>
 
               {/* Education Price */}
               <p className="text-sm text-gray-500 mb-6">
-                教育优惠 ¥{plan.eduPrice}
+                Education discount ${plan.eduPrice}
               </p>
 
               {/* Features */}
@@ -301,6 +302,8 @@ const Pricing = () => {
 
               {/* CTA Button */}
               <button
+                type="button"
+                onClick={() => setShowJustKidding(true)}
                 className={`w-full py-3 px-6 rounded-md font-semibold transition-all duration-300 ${
                   plan.highlight
                     ? 'bg-black text-white hover:bg-gray-800'
@@ -314,6 +317,45 @@ const Pricing = () => {
           ))}
         </div>
       </div>
+
+      {/* Just kidding popup */}
+      {showJustKidding && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          onClick={() => setShowJustKidding(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Just kidding"
+        >
+          <div
+            className="relative bg-white rounded-xl shadow-2xl max-w-sm w-full p-8 text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowJustKidding(false)}
+              className="absolute top-3 right-3 p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <p
+              className="text-2xl font-bold text-black mt-2"
+              style={{ fontFamily: 'Montserrat, sans-serif' }}
+            >
+              Just kidding
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowJustKidding(false)}
+              className="mt-6 w-full py-2.5 px-4 rounded-md bg-black text-white font-semibold hover:bg-gray-800 transition-colors"
+              style={{ fontFamily: 'Montserrat, sans-serif' }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

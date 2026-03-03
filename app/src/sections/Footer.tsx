@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sparkles, MessageCircle, BookOpen, ExternalLink } from 'lucide-react';
+import { Sparkles, Mail, BookOpen, ExternalLink } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,12 +75,12 @@ const Footer = () => {
   const socialLinks = [
     {
       name: '小红书',
-      url: 'https://www.xiaohongshu.com/user/profile/65e96cf7000000000500ddcd',
+      url: 'https://www.xiaohongshu.com/user/profile/60b4584400000000010051c0',
       icon: <BookOpen className="w-4 h-4" />
     },
     {
-      name: 'B站',
-      url: 'https://space.bilibili.com/3546642233953230',
+      name: 'GitHub',
+      url: 'https://github.com/wenhao8210',
       icon: <ExternalLink className="w-4 h-4" />
     }
   ];
@@ -107,7 +107,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              让景观设计更智能、更高效
+              Smarter, more efficient landscape design
             </p>
           </div>
 
@@ -117,23 +117,25 @@ const Footer = () => {
               className="text-lg font-semibold text-white mb-4"
               style={{ fontFamily: 'Montserrat, sans-serif' }}
             >
-              联系我们
+              Contact
             </h4>
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <MessageCircle className="w-4 h-4 text-gray-400" />
-                <div>
-                  <span className="text-gray-400 text-sm">微信：</span>
-                  <span className="text-white text-sm">codescape</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <BookOpen className="w-4 h-4 text-gray-400" />
-                <div>
-                  <span className="text-gray-400 text-sm">公众号：</span>
-                  <span className="text-white text-sm">codescape</span>
-                </div>
-              </div>
+              <a
+                href="mailto:wenhaowang0821@gmail.com"
+                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors"
+              >
+                <Mail className="w-4 h-4 flex-shrink-0" />
+                <span className="text-sm">wenhaowang0821@gmail.com</span>
+              </a>
+              <a
+                href="https://51jobsnail.chat/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm"
+              >
+                <ExternalLink className="w-4 h-4 flex-shrink-0" />
+                <span>Other demo: 51jobsnail.chat</span>
+              </a>
             </div>
           </div>
 
@@ -143,7 +145,7 @@ const Footer = () => {
               className="text-lg font-semibold text-white mb-4"
               style={{ fontFamily: 'Montserrat, sans-serif' }}
             >
-              关注我们
+              Follow
             </h4>
             <div className="flex flex-col gap-3">
               {socialLinks.map((link) => (
@@ -167,21 +169,9 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom pt-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-500 text-sm text-center md:text-left">
-              © 2026 codescape.com All rights reserved.
-            </p>
-            <div className="flex items-center gap-4 text-sm">
-              <a
-                href="https://beian.miit.gov.cn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-300 transition-colors duration-200"
-              >
-                粤ICP备2026005821号-1
-              </a>
-            </div>
-          </div>
+          <p className="text-gray-500 text-sm text-center">
+            © 2026 Wenhao Wang
+          </p>
         </div>
       </div>
     </footer>

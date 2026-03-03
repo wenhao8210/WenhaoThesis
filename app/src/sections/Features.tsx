@@ -16,23 +16,23 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: <Box className="w-8 h-8" />,
-    title: '即时建模',
-    description: '从空间骨架线快速生成三维模型及二维平面CAD，提升工作效率值',
-    tools: ['竖向构造工具', '台阶工具', '栈道工具', '倒角工具', '地形工具', '铺装工具'],
+    title: 'The Semantic "Thick Data" Brush',
+    description: 'Records pressure, velocity, and semantic layers—translating raw, intuitive human gestures into structured, machine-readable data.',
+    tools: ['Sketch', 'Layer Identification', 'Symbol Marking', 'Elevation Mark', 'Contour Line', 'Boardwalk'],
     color: '#c0eced'
   },
   {
     icon: <BarChart3 className="w-8 h-8" />,
-    title: '实时分析',
-    description: '内置汇水、土方分析等专业工具。实时反馈设计数据，提升设计科学性',
-    tools: ['坡度分析与优化', '汇水分析', '土方分析', 'GIS分析'],
+    title: 'Physical Perception meets Digital Precision',
+    description: 'Dynamically calculates crucial site metrics (length, area, slope) while sketching, backing up subjective analogue intuition with objective engineering precision.',
+    tools: ['Slope Analysis & Optimization', 'Drainage', 'Area', 'Length'],
     color: '#f2c1f1'
   },
   {
     icon: <Trees className="w-8 h-8" />,
-    title: '即刻散布',
-    description: '智能散布算法，快速散布植物人物，提升场景丰富度',
-    tools: ['花镜模拟', '风格地被', '乔灌木散布', '人物的散布'],
+    title: 'The Generative Pipeline in Rhino',
+    description: 'Leverages Grasshopper as an invisible backend engine to instantly translate fragmentary, analogue 2D strokes into precise 3D structural information.',
+    tools: ['Tree & Shrubs Scatter', 'Retaining Wall', 'SplitScape'],
     color: '#f4d2ab'
   }
 ];
@@ -149,13 +149,13 @@ const Features = () => {
             className="section-title text-black mb-4"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            三大核心功能
+            Three Core Features
           </h2>
           <p
             ref={subtitleRef}
             className="section-subtitle max-w-2xl mx-auto"
           >
-            构建景观智能工作流，让设计思维回归"空间营造"
+            Capturing Analogue Intent, Realizing Digital Output
           </p>
         </div>
 

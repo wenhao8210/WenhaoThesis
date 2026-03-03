@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="relative w-full overflow-x-hidden">
       {/* Navigation */}
-      <Navigation />
+      <Navigation onOpenBackground={() => setShowSiteIntro(true)} />
 
       {/* Main Content */}
       <main className="relative">

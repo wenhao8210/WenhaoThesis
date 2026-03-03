@@ -6,13 +6,17 @@ import { Sparkles, Menu, X } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
-  { label: '首页', href: '#hero' },
-  { label: '功能介绍', href: '#features' },
-  { label: '价格', href: '#pricing' },
-  { label: '联系', href: '#footer' }
+  { label: 'Home', href: '#hero' },
+  { label: 'Background', href: '#background', action: 'openBackground' as const },
+  { label: 'Features', href: '#features' },
+  { label: 'Tools Preview', href: '#tools' }
 ];
 
-const Navigation = () => {
+interface NavigationProps {
+  onOpenBackground?: () => void;
+}
+
+const Navigation = ({ onOpenBackground }: NavigationProps) => {
   const navRef = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,11 +38,15 @@ const Navigation = () => {
     );
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: { href: string; action?: string }) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+    if (item.action === 'openBackground' && onOpenBackground) {
+      onOpenBackground();
+    } else {
+      const target = document.querySelector(item.href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setIsMobileMenuOpen(false);
   };
@@ -59,7 +67,7 @@ const Navigation = () => {
             {/* Logo */}
             <a
               href="#hero"
-              onClick={(e) => handleNavClick(e, '#hero')}
+              onClick={(e) => handleNavClick(e, { href: '#hero' })}
               className="flex items-center gap-2 group"
             >
               <Sparkles className={`w-5 h-5 transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-black'}`} />
@@ -77,7 +85,7 @@ const Navigation = () => {
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
+                  onClick={(e) => handleNavClick(e, item)}
                   className={`text-sm font-medium transition-colors duration-200 relative group ${
                     isScrolled ? 'text-gray-700 hover:text-black' : 'text-black/80 hover:text-black'
                   }`}
@@ -92,9 +100,9 @@ const Navigation = () => {
             {/* CTA Button */}
             <div className="hidden md:block">
               <a
-                href="#features"
+                href="#tools"
                 className="btn-primary text-sm px-5 py-2 no-underline inline-block"
-                onClick={(e) => handleNavClick(e, '#features')}
+                onClick={(e) => handleNavClick(e, { href: '#tools' })}
               >
                 Get Started
               </a>
@@ -126,7 +134,7 @@ const Navigation = () => {
             <a
               key={item.label}
               href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
+              onClick={(e) => handleNavClick(e, item)}
               className="text-2xl font-bold text-black"
               style={{ fontFamily: 'Montserrat, sans-serif' }}
             >
@@ -134,9 +142,9 @@ const Navigation = () => {
             </a>
           ))}
           <a
-            href="#features"
+            href="#tools"
             className="btn-primary text-lg px-8 py-3 mt-4 no-underline inline-block"
-            onClick={(e) => handleNavClick(e, '#features')}
+            onClick={(e) => handleNavClick(e, { href: '#tools' })}
           >
             Get Started
           </a>

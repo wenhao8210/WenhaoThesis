@@ -4,6 +4,9 @@ import {
   Droplets,
   Unlink,
   Brain,
+  Sparkles,
+  Lock,
+  TreePine,
 } from 'lucide-react';
 import '../Presentation.css';
 
@@ -11,7 +14,7 @@ interface SiteIntroductionProps {
   onClose: () => void;
 }
 
-const totalSlides = 6;
+const totalSlides = 8;
 
 const SiteIntroduction = ({ onClose }: SiteIntroductionProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -25,7 +28,7 @@ const SiteIntroduction = ({ onClose }: SiteIntroductionProps) => {
   }, []);
 
   const goToSlide = (next: number) => {
-    const useTransition = (currentSlide === 2 && next === 3) || (currentSlide === 3 && next === 2);
+    const useTransition = (currentSlide === 3 && next === 4) || (currentSlide === 4 && next === 3);
     if (useTransition && typeof document !== 'undefined' && 'startViewTransition' in document) {
       const doc = document as Document & { startViewTransition: (cb: () => Promise<void>) => void };
       doc.startViewTransition(() => {
@@ -50,15 +53,17 @@ const SiteIntroduction = ({ onClose }: SiteIntroductionProps) => {
   };
 
   return (
-    <div className={`presentation-wrapper${currentSlide === 5 ? ' slide-is-prototype' : ''}`}>
+    <div className={`presentation-wrapper${currentSlide === 6 ? ' slide-is-prototype' : ''}`}>
       {currentSlide === 0 && <Slide1 />}
-      {currentSlide === 1 && <Slide2 />}
-      {currentSlide === 2 && <Slide3 />}
-      {currentSlide === 3 && <Slide4Derivation />}
-      {currentSlide === 4 && <Slide4 />}
-      {currentSlide === 5 && (
+      {currentSlide === 1 && <SlideAmbiguityPrecision />}
+      {currentSlide === 2 && <Slide2 />}
+      {currentSlide === 3 && <Slide3 />}
+      {currentSlide === 4 && <Slide4Derivation />}
+      {currentSlide === 5 && <Slide4 />}
+      {currentSlide === 6 && (
         <Slide5 onPlayVideo={() => setShowPrototypeVideo(true)} />
       )}
+      {currentSlide === 7 && <Slide6Prototype2 />}
 
       {/* Video overlay: top-level so always on top */}
       {showPrototypeVideo && (
@@ -202,7 +207,63 @@ const Slide1 = () => (
   </div>
 );
 
-/* --- Slide 2: The Gap & Lossy Translation --- */
+/* --- Slide 2: Ambiguity vs. Precision --- */
+const SlideAmbiguityPrecision = () => (
+  <div className="slide-container slide-derivation">
+    <div className="brand-tag">WANG Wenhao // MLA 2 Thesis Review</div>
+    <div className="grid-bg" />
+    <div className="glow-orb" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+
+    <div className="content-area derivation-content max-w-4xl mx-auto">
+      <h2 className="slide-title derivation-title text-center mb-8">AMBIGUITY VS. PRECISION</h2>
+
+      <div className="mb-8 w-full rounded-xl overflow-hidden ambiguity-photo-wrap">
+        <img src="/03.png" alt="" className="ambiguity-photo-rotate" />
+      </div>
+
+      <div className="derivation-text-stack ambiguity-blocks">
+        <div className="derivation-text-block ambiguity-item">
+          <div className="feature-icon">
+            <Sparkles className="w-4 h-4" />
+          </div>
+          <div className="ambiguity-item-text">
+            <h3 className="ambiguity-heading">The Power of Ambiguity</h3>
+            <blockquote className="ambiguity-blockquote">
+              &quot;Sketches preserve ambiguity, enabling re-interpretation.&quot;
+              <cite className="ambiguity-cite">— Vinod Goel (1995)</cite>
+            </blockquote>
+          </div>
+        </div>
+        <div className="derivation-text-block ambiguity-item">
+          <div className="feature-icon">
+            <Lock className="w-4 h-4" />
+          </div>
+          <div className="ambiguity-item-text">
+            <h3 className="ambiguity-heading">The Digital Trap</h3>
+            <blockquote className="ambiguity-blockquote">
+              &quot;Interface difficulty limits creative solutions.&quot;
+              <cite className="ambiguity-cite">— Robertson &amp; Radcliffe (2009)</cite>
+            </blockquote>
+          </div>
+        </div>
+        <div className="derivation-text-block ambiguity-item">
+          <div className="feature-icon">
+            <TreePine className="w-4 h-4" />
+          </div>
+          <div className="ambiguity-item-text">
+            <h3 className="ambiguity-heading">The Mismatch in Landscape</h3>
+            <blockquote className="ambiguity-blockquote">
+              &quot;Standard CAD utilizes static &apos;Hard Lines&apos;. This creates a conflict with dynamic landscape systems, forcing designers to lose the temporal ambiguity required to represent growth and change.&quot;
+              <cite className="ambiguity-cite">— Bradley Cantrell (2018)</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+/* --- Slide 3: The Gap & Lossy Translation --- */
 const Slide2 = () => (
   <div className="slide-container">
     <div className="brand-tag">WANG Wenhao // MLA 2 Thesis Review</div>
@@ -220,8 +281,8 @@ const Slide2 = () => (
         <cite className="block mt-3 not-italic text-white/60 text-base">— Tim Ingold (2016)</cite>
       </blockquote>
 
-      <div className="mb-8 w-full rounded-xl overflow-hidden">
-        <img src="/Sketch.png" alt="Sketch" className="w-full h-auto object-cover" />
+      <div className="mb-8 w-full rounded-xl overflow-hidden gap-sketch-wrap">
+        <img src="/Sketch.png" alt="Sketch" className="gap-sketch-rotate" />
       </div>
 
       <div className="feature-list">
@@ -263,92 +324,162 @@ const Slide2 = () => (
   </div>
 );
 
-/* --- Slide 3: DERIVATION --- */
+/* --- Slide 3: Literature Review --- */
 const Slide3 = () => (
   <div className="slide-container slide-derivation">
     <div className="brand-tag">WANG Wenhao // MLA 2 Thesis Review</div>
     <div className="grid-bg" />
     <div className="glow-orb" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
 
-    <div className="content-area derivation-content">
-      <h2 className="slide-title derivation-title">DERIVATION</h2>
+    <div className="content-area derivation-content derivation-split-layout">
+      <h2 className="slide-title derivation-title">LITERATURE REVIEW</h2>
 
-      <div className="derivation-stack">
-        <section className="derivation-section">
+      <div className="derivation-split">
+        <div className="derivation-buttons-stack">
           <h3 className="derivation-heading derivation-morph derivation-morph-brush">Brush</h3>
-          <p className="derivation-citation">Gryaditskaya, Y., et al. (2019) — OpenSketch: A Richly-Annotated Dataset of Product Design Sketches. (ACM SIGGRAPH)</p>
-          <p className="derivation-quote">
-            Analyzing <strong>stroke attributes</strong> such as pressure, speed, and timestamp allows us to distinguish between &apos;exploratory lines&apos; (rough, fast) and &apos;defining lines&apos; (slow, heavy). The digital stroke must <strong>carry this meta-data</strong> to interpret design intent.
-          </p>
-        </section>
-        <section className="derivation-section">
           <h3 className="derivation-heading derivation-morph derivation-morph-scale">Scale</h3>
-          <p className="derivation-citation">Stanislas Chaillou (2019) — AI & Architecture: Towards a New Approach.</p>
-          <p className="derivation-quote">
-            CAD&apos;s infinite zoom causes a loss of <strong>embodied perception of size and proportion</strong>. A fixed-scale digital canvas (e.g. 1:50, 1:20) restores the designer&apos;s sense of physical boundary.
-          </p>
-        </section>
-        <section className="derivation-section">
           <h3 className="derivation-heading derivation-morph derivation-morph-3d">3D info</h3>
-          <p className="derivation-citation">James Gain et al. (2009) — Terrain Sketching. (SIGGRAPH Asia)</p>
-          <p className="derivation-quote">
-            Designing terrain via contours is tedious and unintuitive. A &apos;Sparse Sketching&apos; approach, where the <strong>user defines only key features</strong> (peaks, ridgelines, and silhouette curves), allows the algorithm to interpolate the rest of the surface realistically.
-          </p>
-        </section>
-        <section className="derivation-section">
           <h3 className="derivation-heading derivation-morph derivation-morph-ide">IDE</h3>
-          <p className="derivation-citation">Randy Deutsch (2019) — Superusers: Design Technology Specialists and the Future of Practice.</p>
-          <p className="derivation-quote">
-            The industry&apos;s greatest inefficiency is the &apos;Interoperability Gap&apos;. An Integrated Design Environment (IDE) where sketching and modeling <strong>share the same data structure prevents the destructive &apos;re-modeling&apos; process.</strong>
-          </p>
-        </section>
+        </div>
+        <div className="derivation-text-stack">
+          {/* 1. Brush — two literatures side by side */}
+          <div className="derivation-text-block derivation-literature-row">
+            <div className="derivation-literature-item">
+              <p className="derivation-citation">Gryaditskaya, Y., et al. (2019) - OpenSketch: A Richly-Annotated Dataset of Product Design Sketches. (ACM SIGGRAPH)</p>
+              <p className="derivation-quote">&quot;Analyzing <strong>stroke attributes</strong> such as pressure, speed, and timestamp allows us to distinguish between &apos;exploratory lines&apos; (rough, fast) and &apos;defining lines&apos; (slow, heavy). The digital stroke must <strong>carry this meta-data</strong> to interpret design intent.&quot;</p>
+            </div>
+            <div className="derivation-literature-item">
+              <p className="derivation-citation">Stanislas Chaillou (2019) - AI & Architecture: Towards a New Approach.</p>
+              <p className="derivation-quote">&quot;Geometry alone is insufficient for generation. A &apos;<strong>Semantic Layer</strong>&apos; (labeling function) is the prerequisite for machine understanding. We must organize sketches into colored semantic categories (e.g., Green=Forest, Red=Path) before form-finding.&quot;</p>
+            </div>
+          </div>
+          {/* 2. Scale — two literatures side by side */}
+          <div className="derivation-text-block derivation-literature-row">
+            <div className="derivation-literature-item">
+              <p className="derivation-citation">David Ross Scheer (2014) - The Death of Drawing: Architecture in the Age of Simulation.</p>
+              <p className="derivation-quote">&quot;The &apos;Scalelessness&apos; of the digital viewport detaches the architect from physical reality. Unlike hand-drawing, where the scale is fixed by the paper size, CAD&apos;s <strong>infinite zoom causes a loss of embodied perception of size and proportion</strong>.&quot;</p>
+            </div>
+            <div className="derivation-literature-item">
+              <p className="derivation-citation">Lockett, C., et al. (2020) - User Interface Constraints in Design Tools.</p>
+              <p className="derivation-quote">&quot;Providing real-time quantitative feedback (metrics like area and slope) alongside qualitative sketching reduces the &apos;Cognitive Load&apos; of <strong>switching between drafting and calculating</strong>, enabling informed decision-making during the early conceptual phase.&quot;</p>
+            </div>
+          </div>
+          {/* 3. 3D info — one literature */}
+          <div className="derivation-text-block">
+            <div className="derivation-literature-item">
+              <p className="derivation-citation">James Gain et al. (2009) - Terrain Sketching. (SIGGRAPH Asia)</p>
+              <p className="derivation-quote">&quot;Designing terrain via contours is tedious and unintuitive. A &apos;Sparse Sketching&apos; approach, where the user <strong>defines only key features</strong> (peaks, ridgelines, and silhouette curves), allows the algorithm to interpolate the rest of the surface realistically.&quot;</p>
+            </div>
+          </div>
+          {/* 4. IDE — one literature (80px spacing above) */}
+          <div className="derivation-text-block derivation-block-ide-spacing">
+            <div className="derivation-literature-item">
+              <p className="derivation-citation">Randy Deutsch (2019) - Superusers: Design Technology Specialists and the Future of Practice.</p>
+              <p className="derivation-quote">&quot;The industry&apos;s greatest inefficiency is the &apos;Interoperability Gap&apos;. An Integrated Design Environment (IDE) where sketching and modeling <strong>share the same data structure prevents the destructive &apos;re-modeling&apos; process</strong>.&quot;</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 );
 
-/* --- Slide 4: DERIVATION 转译 — same vertical stack + spacing as Slide 3 --- */
+/* --- Slide 4: DERIVATION 转译 — same split layout as Slide 3, buttons fixed position --- */
 const Slide4Derivation = () => (
   <div className="slide-container slide-derivation slide-derivation-translated">
     <div className="brand-tag">WANG Wenhao // MLA 2 Thesis Review</div>
     <div className="grid-bg" />
     <div className="glow-orb" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
 
-    <div className="content-area derivation-content">
+    <div className="content-area derivation-content derivation-split-layout">
       <h2 className="slide-title derivation-title">DERIVATION</h2>
 
-      <div className="derivation-stack">
-        <section className="derivation-section">
+      <div className="derivation-split">
+        <div className="derivation-buttons-stack">
           <h3 className="derivation-heading derivation-morph derivation-morph-brush">Brush</h3>
-          <ul className="derivation-bullets">
-            <li>Thick Data Recording (pressure / semantics / velocity / time)</li>
-            <li>Layer management</li>
-          </ul>
-        </section>
-        <section className="derivation-section">
           <h3 className="derivation-heading derivation-morph derivation-morph-scale">Scale</h3>
-          <ul className="derivation-bullets">
-            <li>No Infinite Zoom, but 1:50, 1:20…</li>
-            <li>Real-time Analytics (Length, Area, Slope, etc.)</li>
-          </ul>
-        </section>
-        <section className="derivation-section">
           <h3 className="derivation-heading derivation-morph derivation-morph-3d">3D info</h3>
-          <ul className="derivation-bullets">
-            <li>Gestural Topography (Fragmentary Intuition)</li>
-          </ul>
-        </section>
-        <section className="derivation-section">
           <h3 className="derivation-heading-wrap derivation-heading-ide">
             <span className="derivation-heading derivation-morph derivation-morph-ide">IDE</span>
             <span className="derivation-heading-sub">(Integrated Design Environment)</span>
           </h3>
-          <ul className="derivation-bullets">
-            <li>Rhino UI</li>
-            <li>Vector Workflow</li>
-            <li>GH Backend</li>
-          </ul>
-        </section>
+        </div>
+        <div className="derivation-text-stack derivation-text-stack-bullets">
+          <div className="derivation-text-block">
+            <ul className="derivation-bullets">
+              <li>Thick Data Recording (pressure / semantics / velocity / time)</li>
+              <li>Layer management</li>
+            </ul>
+          </div>
+          <div className="derivation-text-block">
+            <ul className="derivation-bullets">
+              <li>No Infinite Zoom, but 1:50, 1:20…</li>
+              <li>Real-time Analytics (Length, Area, Slope, etc.)</li>
+            </ul>
+          </div>
+          <div className="derivation-text-block">
+            <ul className="derivation-bullets">
+              <li>Gestural Topography (Fragmentary Intuition)</li>
+            </ul>
+          </div>
+          <div className="derivation-text-block">
+            <ul className="derivation-bullets">
+              <li>Rhino UI</li>
+              <li>Vector Workflow</li>
+              <li>GH Backend</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+/* --- Slide 7: PROTOTYPE 2.0 — same split layout as Slide 3/4, buttons fixed position --- */
+const Slide6Prototype2 = () => (
+  <div className="slide-container slide-derivation slide-derivation-translated">
+    <div className="brand-tag">WANG Wenhao // MLA 2 Thesis Review</div>
+    <div className="grid-bg" />
+    <div className="glow-orb" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+
+    <div className="content-area derivation-content derivation-split-layout">
+      <h2 className="slide-title derivation-title">PROTOTYPE 2.0</h2>
+
+      <div className="derivation-split">
+        <div className="derivation-buttons-stack">
+          <h3 className="derivation-heading derivation-morph derivation-morph-brush">Brush</h3>
+          <h3 className="derivation-heading derivation-morph derivation-morph-scale">Scale</h3>
+          <h3 className="derivation-heading derivation-morph derivation-morph-3d">3D info</h3>
+          <h3 className="derivation-heading-wrap derivation-heading-ide">
+            <span className="derivation-heading derivation-morph derivation-morph-ide">IDE</span>
+            <span className="derivation-heading-sub">(Integrated Design Environment)</span>
+          </h3>
+        </div>
+        <div className="derivation-text-stack derivation-text-stack-bullets">
+          <div className="derivation-text-block">
+            <ul className="derivation-bullets">
+              <li><span className="line-through">Multi-dimensional input (Pressure, Velocity, Time)</span></li>
+              <li>Semantic Layering (Path, hardscape, contour, shrubs, trees, water)</li>
+            </ul>
+          </div>
+          <div className="derivation-text-block">
+            <ul className="derivation-bullets">
+              <li><span className="line-through">Fix scales</span></li>
+              <li>Real-time Analytics (Length, Slope, Area, Green cover)</li>
+            </ul>
+          </div>
+          <div className="derivation-text-block">
+            <ul className="derivation-bullets">
+              <li>Sketch-to-Model pipeline for different landscape elements</li>
+            </ul>
+          </div>
+          <div className="derivation-text-block">
+            <ul className="derivation-bullets">
+              <li>Minimize Data transfer (Rhino & Grasshopper)</li>
+              <li>Simple & intuitive</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -437,35 +568,18 @@ const Slide5 = ({ onPlayVideo }: { onPlayVideo: () => void }) => (
         <h3 className="prototype-limitations-title">Limitations of 1.0</h3>
 
         <div className="prototype-limitations-item">
-          <h4 className="prototype-limitations-head">1. Performance Bottleneck: High Latency & Rendering Lag</h4>
-          <ul>
-            <li><strong>Computational Overload:</strong> The plugin must record and re-process every geometric data point (control points, coordinates) of Rhino curves to display them on the custom canvas.</li>
-            <li><strong>Background Density:</strong> Heavy reference data, such as complex site contours, causes severe lag, making fluid, real-time sketching impossible.</li>
-          </ul>
+          <h4 className="prototype-limitations-head">1. Missing Sketch-to-Model Pipeline</h4>
+          <p className="prototype-limitations-body">Over-invested in building the canvas. Solved how to sketch, but lacked a workflow to turn sketches into actual 3D models.</p>
         </div>
 
         <div className="prototype-limitations-item">
-          <h4 className="prototype-limitations-head">2. Technical Restrictions: Python GUI Rendering Limits</h4>
-          <ul>
-            <li><strong>Front-end Efficiency:</strong> Python&apos;s GUI libraries struggle with high-performance vector rendering, leading to jittery zooming and panning.</li>
-            <li><strong>Feature Gaps:</strong> Significant difficulty in implementing advanced UI interactions, such as image opacity adjustment or dynamic viewport capturing for reference backgrounds.</li>
-          </ul>
+          <h4 className="prototype-limitations-head">2. Severe Lag from Data Transfer</h4>
+          <p className="prototype-limitations-body">Copying and syncing reference data back and forth causes major performance bottlenecks.</p>
         </div>
 
         <div className="prototype-limitations-item">
-          <h4 className="prototype-limitations-head">3. Development Complexity: Maintenance & Stability Issues</h4>
-          <ul>
-            <li><strong>Reinventing the Wheel:</strong> Excessive development effort is spent recreating core Rhino features (panning, rotating, and zooming) from scratch.</li>
-            <li><strong>Fragile Architecture:</strong> With over 3,000 lines of code, the system has become highly coupled; minor updates often lead to critical failures (&quot;keeps breaking&quot;).</li>
-          </ul>
-        </div>
-
-        <div className="prototype-limitations-item">
-          <h4 className="prototype-limitations-head">4. Hardware Incompatibility: Input Limitations</h4>
-          <ul>
-            <li><strong>Pressure Sensitivity Loss:</strong> Current custom UI fails to capture Apple Pencil pressure data via Sidecar, stripping the sketch of its artistic and professional nuance.</li>
-            <li><strong>Input Fragmentation:</strong> The separation from the native Rhino environment prevents the use of optimized multi-touch gestures and tablet-specific drivers.</li>
-          </ul>
+          <h4 className="prototype-limitations-head">3. Clunky & Unintuitive UI</h4>
+          <p className="prototype-limitations-body">The interface is overly complex and technical, breaking the natural, intuitive flow of sketching.</p>
         </div>
       </div>
     </div>

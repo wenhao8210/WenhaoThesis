@@ -12,6 +12,8 @@ interface ToolPreview {
   title: string;
   url?: string;
   video?: string;
+  /** 为 true 时封面显示 Working In Progress，点击仍可打开 url */
+  coverWIP?: boolean;
   /** 封面显示该秒数所在的帧（秒）；负数表示距结尾的秒数，如 -1 为最后一秒 */
   posterTime?: number;
   rotation: number;
@@ -43,8 +45,8 @@ const toolPreviews: ToolPreview[] = [
   // INFRASTRUCTURE — Seating、Retaining Wall 封面为 Working In Progress
   { id: 5, title: 'Seating', rotation: -3, category: 'INFRASTRUCTURE' },
   { id: 6, title: 'Retaining Wall', rotation: 0, category: 'INFRASTRUCTURE' },
-  // WATER
-  { id: 12, title: '汇水分析演示', url: 'https://www.xiaohongshu.com/explore/69378b1e000000000d0352b5', rotation: 1, category: 'WATER' },
+  // WATER — 河道与 pond，封面 Working In Progress，点击跳转链接
+  { id: 12, title: 'River & Pond', url: 'https://www.xiaohongshu.com/explore/69378b1e000000000d0352b5', coverWIP: true, rotation: 1, category: 'WATER' },
   // SHRUBS & TREE
   { id: 13, title: 'GenShrub', video: '/GenShrub.mp4', posterTime: -1, rotation: -1, category: 'SHRUBS_AND_TREES' },
   { id: 16, title: 'OrientTree', video: '/OrientTree.mp4', posterTime: -1, rotation: 1, category: 'SHRUBS_AND_TREES' },
@@ -201,7 +203,7 @@ const ToolsPreview = () => {
           </p>
         </div>
 
-        {/* Quick Demo Showcase — 80% width video above PATH */}
+        {/* Quick Get Started — 80% width video above PATH */}
         <div className="w-[80%] mx-auto mb-12 md:mb-16 rounded-lg overflow-hidden bg-gray-900 shadow-lg">
           <video
             src="/QuickDemoShowcase/demo.mp4"
@@ -276,6 +278,15 @@ const ToolsPreview = () => {
                                 else v.currentTime = t >= 0 ? t : Math.max(0, v.duration + t);
                               }}
                             />
+                          ) : preview.coverWIP ? (
+                            <div className="absolute inset-0 flex items-center justify-center bg-gray-700">
+                              <span
+                                className="text-white/90 text-sm md:text-base font-medium px-3 text-center"
+                                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                              >
+                                Working In Progress
+                              </span>
+                            </div>
                           ) : preview.url ? (
                             <>
                               <div

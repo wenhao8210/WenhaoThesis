@@ -238,11 +238,11 @@ const Hero = ({ onSiteIntroClick }: HeroProps) => {
         {/* CTA Buttons */}
         <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#features"
+            href="#tools"
             className="cta-btn btn-primary text-base md:text-lg px-8 py-4 no-underline text-center"
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' });
+              document.querySelector('#tools')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
             Get Started
@@ -257,16 +257,25 @@ const Hero = ({ onSiteIntroClick }: HeroProps) => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator — 点击滚动到下一部分 #tools */}
       <div
         ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-black/60"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-black/60 cursor-pointer"
         style={{ opacity: 0 }}
       >
-        <span className="text-sm mb-2 tracking-wider" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-          向下滚动
-        </span>
-        <ArrowDown className="w-5 h-5 animate-bounce-slow" />
+        <button
+          type="button"
+          className="flex flex-col items-center border-0 bg-transparent p-0 cursor-pointer text-inherit"
+          onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('#tools')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          <span className="text-sm mb-2 tracking-wider" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            Scroll Down
+          </span>
+          <ArrowDown className="w-5 h-5 animate-bounce-slow" />
+        </button>
       </div>
     </section>
   );
