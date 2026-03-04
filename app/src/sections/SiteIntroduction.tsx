@@ -218,7 +218,7 @@ const SlideAmbiguityPrecision = () => (
       <h2 className="slide-title derivation-title text-center mb-8">AMBIGUITY VS. PRECISION</h2>
 
       <div className="mb-8 w-full rounded-xl overflow-hidden ambiguity-photo-wrap">
-        <img src="/03.png" alt="" className="ambiguity-photo-rotate" />
+        <img src="/04.png" alt="" className="ambiguity-photo-rotate" />
       </div>
 
       <div className="derivation-text-stack ambiguity-blocks">
