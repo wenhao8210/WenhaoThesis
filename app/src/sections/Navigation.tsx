@@ -14,9 +14,10 @@ const navItems = [
 
 interface NavigationProps {
   onOpenBackground?: () => void;
+  onGetStarted?: () => void;
 }
 
-const Navigation = ({ onOpenBackground }: NavigationProps) => {
+const Navigation = ({ onOpenBackground, onGetStarted }: NavigationProps) => {
   const navRef = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -99,13 +100,16 @@ const Navigation = ({ onOpenBackground }: NavigationProps) => {
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <a
-                href="#tools"
-                className="btn-primary text-sm px-5 py-2 no-underline inline-block"
-                onClick={(e) => handleNavClick(e, { href: '#tools' })}
+              <button
+                type="button"
+                className="btn-primary text-sm px-5 py-2 inline-block border-0 cursor-pointer"
+                onClick={() => {
+                  onGetStarted?.();
+                  setIsMobileMenuOpen(false);
+                }}
               >
                 Get Started
-              </a>
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -141,13 +145,16 @@ const Navigation = ({ onOpenBackground }: NavigationProps) => {
               {item.label}
             </a>
           ))}
-          <a
-            href="#tools"
-            className="btn-primary text-lg px-8 py-3 mt-4 no-underline inline-block"
-            onClick={(e) => handleNavClick(e, { href: '#tools' })}
+          <button
+            type="button"
+            className="btn-primary text-lg px-8 py-3 mt-4 inline-block border-0 cursor-pointer"
+            onClick={() => {
+              onGetStarted?.();
+              setIsMobileMenuOpen(false);
+            }}
           >
             Get Started
-          </a>
+          </button>
         </div>
       </div>
     </>

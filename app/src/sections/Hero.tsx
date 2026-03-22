@@ -4,9 +4,10 @@ import { ArrowDown, Sparkles } from 'lucide-react';
 
 interface HeroProps {
   onSiteIntroClick?: () => void;
+  onGetStarted?: () => void;
 }
 
-const Hero = ({ onSiteIntroClick }: HeroProps) => {
+const Hero = ({ onSiteIntroClick, onGetStarted }: HeroProps) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const displayTextRef = useRef<HTMLDivElement>(null);
@@ -237,16 +238,13 @@ const Hero = ({ onSiteIntroClick }: HeroProps) => {
 
         {/* CTA Buttons */}
         <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#tools"
-            className="cta-btn btn-primary text-base md:text-lg px-8 py-4 no-underline text-center"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('#tools')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+          <button
+            type="button"
+            className="cta-btn btn-primary text-base md:text-lg px-8 py-4 text-center border-0 cursor-pointer"
+            onClick={() => onGetStarted?.()}
           >
             Get Started
-          </a>
+          </button>
           <button
             type="button"
             className="cta-btn btn-secondary text-base md:text-lg px-8 py-4"
