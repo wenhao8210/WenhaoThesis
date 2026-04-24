@@ -75,7 +75,7 @@ const DesignEvolution = () => {
         introDelayCall = null;
       };
 
-      const introTrigger = ScrollTrigger.create({
+      ScrollTrigger.create({
         trigger: section,
         start: 'top 80%',
         onEnter: scheduleIntroTransition,
