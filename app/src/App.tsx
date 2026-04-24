@@ -4,8 +4,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from './sections/Navigation';
 import Hero from './sections/Hero';
+import DesignEvolution from './sections/DesignEvolution';
 import SiteIntroduction from './sections/SiteIntroduction';
 import Features from './sections/Features';
+import RequirementsWorkflow from './sections/RequirementsWorkflow';
+import WorkflowStack from './sections/WorkflowStack';
 import ToolsPreview from './sections/ToolsPreview';
 import Pricing from './sections/Pricing';
 import Footer from './sections/Footer';
@@ -60,9 +63,22 @@ function App() {
           />
         </section>
 
+        {/* Design Evolution Section */}
+        <DesignEvolution />
+
         {/* Features Section */}
         <section id="features">
           <Features />
+        </section>
+
+        {/* Requirements Workflow Section */}
+        <section id="requirements-workflow">
+          <RequirementsWorkflow />
+        </section>
+
+        {/* Workflow Stack Section */}
+        <section id="workflow-stack">
+          <WorkflowStack />
         </section>
 
         {/* Tools Preview Section */}

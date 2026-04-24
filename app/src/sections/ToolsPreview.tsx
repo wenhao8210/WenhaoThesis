@@ -12,6 +12,7 @@ interface ToolPreview {
   title: string;
   url?: string;
   video?: string;
+  image?: string;
   /** 为 true 时封面显示 Working In Progress，点击仍可打开 url */
   coverWIP?: boolean;
   /** 封面显示该秒数所在的帧（秒）；负数表示距结尾的秒数，如 -1 为最后一秒 */
@@ -32,21 +33,20 @@ const CATEGORY_LABELS: Record<ToolCategory, string> = {
 };
 
 const toolPreviews: ToolPreview[] = [
-  // PATH — 3 videos
+  // PATH
   { id: 1, title: 'Join Path', video: '/JoinPath.mp4', rotation: -1, category: 'PATH' },
   { id: 2, title: 'Ramp Gen', video: '/AdjustPath.mp4', rotation: 1, category: 'PATH' },
   { id: 3, title: 'Stair Gen', video: '/GenStairs.mp4', rotation: -2, category: 'PATH' },
-  // HARDSCAPE — Splitscape 有视频；Paving 封面为 Working In Progress
+  { id: 17, title: 'ReduceSimCrv', image: '/ReduceSimCrv.png', rotation: 2, category: 'PATH' },
+  // HARDSCAPE
   { id: 4, title: 'SplitScape', video: '/SplitScape.mp4', rotation: 0, category: 'HARDSCAPE' },
-  { id: 7, title: 'Paving', rotation: 2, category: 'HARDSCAPE' },
   // TOPO
   { id: 9, title: 'SketchToTopo', video: '/SketchToTopo.mp4', posterTime: -1, rotation: 1, category: 'TOPO' },
   { id: 15, title: 'SketchToTopo2', video: '/SketchToTopo2.mp4', posterTime: -1, rotation: -1, category: 'TOPO' },
-  // INFRASTRUCTURE — Seating、Retaining Wall 封面为 Working In Progress
-  { id: 5, title: 'Seating', rotation: -3, category: 'INFRASTRUCTURE' },
-  { id: 6, title: 'Retaining Wall', rotation: 0, category: 'INFRASTRUCTURE' },
-  // WATER — 河道与 pond，封面 Working In Progress，点击跳转链接
-  { id: 12, title: 'River & Pond', url: 'https://www.xiaohongshu.com/explore/69378b1e000000000d0352b5', coverWIP: true, rotation: 1, category: 'WATER' },
+  // INFRASTRUCTURE
+  { id: 6, title: 'Retaining Wall', image: '/GetDitch-negative.png', rotation: 0, category: 'INFRASTRUCTURE' },
+  // WATER
+  { id: 12, title: 'River & Pond', url: 'https://www.xiaohongshu.com/explore/69378b1e000000000d0352b5', image: '/Docofossor-negative.png', rotation: 1, category: 'WATER' },
   // SHRUBS & TREE
   { id: 13, title: 'GenShrub', video: '/GenShrub.mp4', posterTime: -1, rotation: -1, category: 'SHRUBS_AND_TREES' },
   { id: 16, title: 'OrientTree', video: '/OrientTree.mp4', posterTime: -1, rotation: 1, category: 'SHRUBS_AND_TREES' },
@@ -54,10 +54,12 @@ const toolPreviews: ToolPreview[] = [
 
 const ToolsPreview = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const heroImageRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [videoModal, setVideoModal] = useState<{ src: string; title: string } | null>(null);
+  const [heroImageSrc, setHeroImageSrc] = useState('/7.png');
 
   useEffect(() => {
     if (videoModal) {
@@ -69,6 +71,36 @@ const ToolsPreview = () => {
       document.body.style.overflow = '';
     };
   }, [videoModal]);
+
+  useEffect(() => {
+    const target = heroImageRef.current;
+    if (!target || heroImageSrc === '/8.png') return;
+
+    let timeoutId: number | null = null;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          timeoutId = window.setTimeout(() => {
+            setHeroImageSrc('/8.png');
+          }, 3000);
+        } else if (timeoutId !== null) {
+          window.clearTimeout(timeoutId);
+          timeoutId = null;
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, [heroImageSrc]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -179,6 +211,34 @@ const ToolsPreview = () => {
       className="relative py-20 md:py-32 w-full bg-gray-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={heroImageRef} className="relative left-1/2 w-[120%] max-w-none -translate-x-1/2 mb-12 md:mb-16">
+          <img
+            src={heroImageSrc}
+            alt="Tools preview overview"
+            className="block h-auto w-full"
+          />
+        </div>
+
+        {/* Quick Demo Showcase */}
+        <div className="w-[80%] mx-auto mb-12 md:mb-16 rounded-lg overflow-hidden bg-gray-900 shadow-lg">
+          <iframe
+            src="https://www.youtube.com/embed/FmjGvaAdfSw"
+            title="Quick Demo Showcase"
+            className="w-full aspect-video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+
+        <div className="relative left-1/2 w-[120%] max-w-none -translate-x-1/2 mb-12 md:mb-16">
+          <img
+            src="/9.png"
+            alt="Tools preview detail"
+            className="block h-auto w-full"
+          />
+        </div>
+
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2
@@ -203,7 +263,7 @@ const ToolsPreview = () => {
           </p>
         </div>
 
-        {/* CreateCommand — same size as Quick Demo, above it */}
+        {/* CreateCommand */}
         <div className="w-[80%] mx-auto mb-12 md:mb-16">
           <h3
             className="text-lg md:text-xl font-bold text-black mb-4 text-center"
@@ -245,11 +305,12 @@ const ToolsPreview = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                   {items.map((preview, i) => {
                     const globalIndex = firstIndex + i;
+                    const isInteractive = Boolean(preview.video || preview.url);
                     return (
                       <div
                         key={preview.id}
                         data-index={globalIndex}
-                        className="preview-card relative bg-white rounded-lg overflow-hidden cursor-pointer group"
+                        className={`preview-card relative bg-white rounded-lg overflow-hidden group ${isInteractive ? 'cursor-pointer' : 'cursor-default'}`}
                         style={{
                           transform: `rotate(${preview.rotation}deg)`,
                           boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
@@ -288,6 +349,12 @@ const ToolsPreview = () => {
                                 if (t == null) v.currentTime = 0;
                                 else v.currentTime = t >= 0 ? t : Math.max(0, v.duration + t);
                               }}
+                            />
+                          ) : preview.image ? (
+                            <img
+                              src={preview.image}
+                              alt={preview.title}
+                              className="w-full h-full object-cover"
                             />
                           ) : preview.coverWIP ? (
                             <div className="absolute inset-0 flex items-center justify-center bg-gray-700">
@@ -346,19 +413,6 @@ const ToolsPreview = () => {
             );
           })}
 
-          {/* Quick Demo Showcase — below Shrubs & Tree */}
-          <div className="w-[80%] mx-auto rounded-lg overflow-hidden bg-gray-900 shadow-lg">
-            <video
-              src="/QuickDemoShowcase/demo.mp4"
-              poster="/QuickDemoShowcase/Cover.jpg"
-              className="w-full aspect-video object-cover"
-              controls
-              playsInline
-              preload="metadata"
-            >
-              Your browser does not support the video tag.
-            </video>
-          </div>
         </div>
       </div>
 

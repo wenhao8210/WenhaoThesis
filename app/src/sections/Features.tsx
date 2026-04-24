@@ -6,6 +6,7 @@ import { Box, BarChart3, Trees } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 interface Feature {
+  step: string;
   icon: React.ReactNode;
   title: string;
   description: string;
@@ -15,24 +16,27 @@ interface Feature {
 
 const features: Feature[] = [
   {
+    step: 'Step 1',
     icon: <Box className="w-8 h-8" />,
-    title: 'The Semantic "Thick Data" Brush',
-    description: 'Records pressure, velocity, and semantic layers—translating raw, intuitive human gestures into structured, machine-readable data.',
-    tools: ['Sketch', 'Layer Identification', 'Symbol Marking', 'Elevation Mark', 'Contour Line', 'Boardwalk'],
+    title: 'Analogue Input',
+    description: 'A canvas that keeps the feel of hand drawing while capturing digital input.',
+    tools: ['Canvas', 'Gesture', 'Pressure'],
     color: '#c0eced'
   },
   {
+    step: 'Step 2',
     icon: <BarChart3 className="w-8 h-8" />,
-    title: 'Physical Perception meets Digital Precision',
-    description: 'Dynamically calculates crucial site metrics (length, area, slope) while sketching, backing up subjective analogue intuition with objective engineering precision.',
-    tools: ['Slope Analysis & Optimization', 'Drainage', 'Area', 'Length'],
+    title: 'Semantic Translation',
+    description: 'Translate strokes into readable landscape elements.',
+    tools: ['Road', 'Topo', 'Water'],
     color: '#f2c1f1'
   },
   {
+    step: 'Step 3',
     icon: <Trees className="w-8 h-8" />,
-    title: 'The Generative Pipeline in Rhino',
-    description: 'Leverages Grasshopper as an invisible backend engine to instantly translate fragmentary, analogue 2D strokes into precise 3D structural information.',
-    tools: ['Tree & Shrubs Scatter', 'Retaining Wall', 'SplitScape'],
+    title: '3D Embodiment',
+    description: 'Give 2D elements 3D data, geometry, and physical form.',
+    tools: ['Elevation', 'Geometry', 'Form'],
     color: '#f4d2ab'
   }
 ];
@@ -149,13 +153,13 @@ const Features = () => {
             className="section-title text-black mb-4"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            Three Core Features
+            Requirements Breakdown
           </h2>
           <p
             ref={subtitleRef}
             className="section-subtitle max-w-2xl mx-auto"
           >
-            Capturing Analogue Intent, Realizing Digital Output
+            From sketch to spatial form
           </p>
         </div>
 
@@ -201,6 +205,13 @@ const Features = () => {
                   {feature.icon}
                 </div>
 
+                <p
+                  className="mb-2 text-xs md:text-sm font-semibold uppercase tracking-[0.18em] text-black/45"
+                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                >
+                  {feature.step}
+                </p>
+
                 {/* Title */}
                 <h3
                   className="text-xl md:text-2xl font-bold text-black mb-4"
@@ -210,7 +221,7 @@ const Features = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 mb-6 leading-relaxed flex-1">
+                <p className="text-gray-500 mb-5 leading-relaxed flex-1 text-sm md:text-base">
                   {feature.description}
                 </p>
 
