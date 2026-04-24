@@ -146,6 +146,14 @@ const Features = () => {
       style={{ perspective: '1000px' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative left-1/2 w-[122%] max-w-none -translate-x-1/2 mb-12 md:mb-16">
+          <img
+            src="/0.png"
+            alt="Requirements breakdown overview"
+            className="block h-auto w-full"
+          />
+        </div>
+
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
           <h2
